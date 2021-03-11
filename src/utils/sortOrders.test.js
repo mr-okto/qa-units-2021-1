@@ -4,7 +4,7 @@ import {sortOrders, getSortFunction, sortTypes, sortByItemCount, sortByDate} fro
 describe('sortByItemCount function', () => {
 	it('orders are null', () => {
 		const result = sortByItemCount(null, null);
-		expect(result).toEqual(0);
+		expect(result).toBe(0);
 	});
 
 	it('same items count', () => {
@@ -34,7 +34,7 @@ describe('sortByItemCount function', () => {
 
 	it('items are not objects', () => {
 		const result = sortByItemCount(undefined, undefined);
-		expect(result).toEqual(0);
+		expect(result).toBe(0);
 	});
 
 	test.each([

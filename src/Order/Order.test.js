@@ -11,11 +11,10 @@ import {fakeOrders} from "../data/fakeOrders";
 
 configure({adapter: new Adapter()});
 
-getDate.mockReturnValue("11 марта, чт, 2021 год");
-
 describe('Order.js', () => {
   beforeEach(() => {
     jest.resetModules();
+    getDate.mockReturnValue("11 марта, чт, 2021 год");
   });
   afterAll(() => {
     jest.resetModules();
@@ -53,9 +52,15 @@ describe('Order.js', () => {
   });
 
   it('render fake order snapshot', () => {
-    const order = fakeOrders[0]
+    const order = fakeOrders[0];
     const wrapper = shallow(<Order order={order}/>);
     expect(toJson(wrapper)).toMatchSnapshot();
+  });
+
+  it('getDate is called', () => {
+    const order = fakeOrders[0]
+    const wrapper = shallow(<Order order={order}/>);
+    expect(getDate).toHaveBeenCalled();
   });
 });
 
