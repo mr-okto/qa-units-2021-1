@@ -101,9 +101,8 @@ describe('getSortFunction function', () => {
 	test.each([
 		[sortTypes.COUNT, sortByItemCount],
 		[sortTypes.DATE, sortByDate],
+		['non-existent-sort', undefined],
 	])('getSortFunction test switch', (sortType, expected) => {
 		expect(getSortFunction(sortType)).toBe(expected);
 	});
 });
-
-
