@@ -12,11 +12,12 @@ import {fakeOrders} from "../data/fakeOrders";
 configure({adapter: new Adapter()});
 
 describe('Order.js', () => {
+  let order;
   beforeEach(() => {
-    jest.resetModules();
+    order = Object.assign({}, fakeOrders[0]);
     getDate.mockReturnValue("11 марта, чт, 2021 год");
   });
-  afterAll(() => {
+  afterEach(() => {
     jest.resetModules();
   });
 
@@ -31,34 +32,29 @@ describe('Order.js', () => {
   });
 
   it('render order without shop is null', () => {
-    let order = Object.assign({}, fakeOrders[0]);
     delete order.shop;
     const wrapper = shallow(<Order order={order}/>);
     expect(wrapper.getElement()).toBeNull();
   });
 
   it('render order without date is null', () => {
-    let order = Object.assign({}, fakeOrders[0]);
     delete order.date;
     const wrapper = shallow(<Order order={order}/>);
     expect(wrapper.getElement()).toBeNull();
   });
 
   it('render order without items snapshot', () => {
-    let order = Object.assign({}, fakeOrders[0]);
     delete order.items;
     const wrapper = shallow(<Order order={order}/>);
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
   it('render fake order snapshot', () => {
-    const order = fakeOrders[0];
     const wrapper = shallow(<Order order={order}/>);
     expect(toJson(wrapper)).toMatchSnapshot();
   });
 
   it('getDate is called', () => {
-    const order = fakeOrders[0]
     const wrapper = shallow(<Order order={order}/>);
     expect(getDate).toHaveBeenCalled();
   });
